@@ -192,6 +192,23 @@
       -webkit-line-clamp: 2;
     }
 
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      color: var(--muted);
+    }
+
+    .contact-links a:hover {
+      color: var(--accent);
+    }
+
+    .contact-links a:not(:last-child)::after {
+      content: "·";
+      margin-left: 0.6rem;
+      color: var(--muted);
+    }
+
     .email-placeholder {
       color: var(--muted);
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
@@ -275,8 +292,10 @@
 
     <section id="contact">
       <p class="eyebrow">Contact</p>
-      <p class="section-text">Email for communication.</p>
-      <span class="email-placeholder">Add public email</span>
+      <div class="contact-links" aria-label="Contact links">
+        <a href="mailto:your.email@example.com">Email</a>
+        <a href="#">Social</a>
+      </div>
     </section>
   </main>
 
