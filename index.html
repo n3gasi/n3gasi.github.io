@@ -44,6 +44,7 @@
     .site-header {
       position: sticky;
       top: 0;
+      z-index: 10;
       background: rgba(248, 247, 243, 0.94);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--line);
@@ -66,11 +67,14 @@
       font-weight: 400;
       letter-spacing: 0.01em;
       line-height: 1;
+      white-space: nowrap;
     }
 
     .nav-links {
       display: flex;
-      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 0.85rem;
       color: var(--muted);
       font-size: 0.92rem;
     }
@@ -82,7 +86,7 @@
     }
 
     section {
-      padding: 5rem 0;
+      padding: clamp(4rem, 8vw, 5rem) 0;
       border-bottom: 1px solid var(--line);
     }
 
@@ -137,7 +141,8 @@
     }
 
     .tag-list,
-    .research-links {
+    .research-links,
+    .footer-links {
       display: flex;
       flex-wrap: wrap;
       gap: 0.6rem;
@@ -159,10 +164,9 @@
 
     .tag:not(:last-child)::after,
     .research-links a:not(:last-child)::after,
-    footer a::before {
+    .footer-links span:not(:last-child)::after {
       content: "·";
       margin-left: 0.6rem;
-      margin-right: 0.6rem;
       color: var(--muted);
     }
 
@@ -215,19 +219,38 @@
       .nav {
         align-items: flex-start;
         flex-direction: column;
+        gap: 0.75rem;
       }
 
       .nav-links {
-        flex-wrap: wrap;
+        justify-content: flex-start;
       }
 
       section {
-        padding: 4rem 0;
+        padding: 3.75rem 0;
       }
 
       .post-link {
         grid-template-columns: 1fr;
         gap: 0.25rem;
+        padding: 1.2rem 0;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .nav,
+      main,
+      footer {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      .brand {
+        font-size: 1.35rem;
+      }
+
+      .lead {
+        font-size: 1.05rem;
       }
     }
   </style>
@@ -293,7 +316,10 @@
   </main>
 
   <footer>
-    © 2026 Negasi<a href="mailto:your.email@example.com">Email</a>
+    <div class="footer-links">
+      <span>© 2026 Negasi</span>
+      <span><a href="mailto:your.email@example.com">Email</a></span>
+    </div>
   </footer>
 </body>
 </html>
