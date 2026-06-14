@@ -122,7 +122,7 @@
 
     .lead,
     .section-text,
-    .post-card p,
+    .post-summary,
     footer {
       color: var(--muted);
     }
@@ -150,8 +150,42 @@
       color: var(--muted);
     }
 
-    .post-card {
-      max-width: 620px;
+    .post-list {
+      display: grid;
+      gap: 0;
+      margin-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .post-link {
+      display: grid;
+      grid-template-columns: 8.5rem 1fr;
+      gap: 1.5rem;
+      padding: 1.35rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .post-link:hover .post-title {
+      color: var(--accent);
+    }
+
+    .post-date {
+      color: var(--muted);
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+
+    .post-title {
+      margin-bottom: 0.35rem;
+      transition: color 0.2s ease;
+    }
+
+    .post-summary {
+      display: -webkit-box;
+      margin-bottom: 0;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
     }
 
     .email-placeholder {
@@ -175,6 +209,11 @@
 
       section {
         padding: 4rem 0;
+      }
+
+      .post-link {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
       }
     }
   </style>
@@ -210,10 +249,25 @@
 
     <section id="blog">
       <p class="eyebrow">Blog</p>
-      <h2>Writing</h2>
-      <div class="post-card">
-        <h3>Coming soon</h3>
-        <p>Short notes and updates.</p>
+      <h2>Writing & News</h2>
+      <p class="section-text">Notes, updates, and selected news.</p>
+
+      <div class="post-list" aria-label="Recent posts">
+        <a class="post-link" href="posts/first-post.html" target="_blank" rel="noopener noreferrer">
+          <time class="post-date" datetime="2026-06-15">June 15, 2026</time>
+          <div>
+            <h3 class="post-title">First post title</h3>
+            <p class="post-summary">This is a short two-line preview for a writing, update, or news item. Replace this text with the opening summary of the full post.</p>
+          </div>
+        </a>
+
+        <a class="post-link" href="posts/news-update.html" target="_blank" rel="noopener noreferrer">
+          <time class="post-date" datetime="2026-06-15">June 15, 2026</time>
+          <div>
+            <h3 class="post-title">News update title</h3>
+            <p class="post-summary">Use this space for a compact news summary. The list keeps only two visible lines and opens the full page in a new tab.</p>
+          </div>
+        </a>
       </div>
     </section>
 
