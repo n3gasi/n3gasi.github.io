@@ -1,20 +1,11 @@
-# Negasi PhD Website (GitHub Pages)
+# Personal Website
 
-This is a simple static academic website (HTML/CSS/JS).
+This repository contains a minimal public website hosted with GitHub Pages.
 
-## Quick start (GitHub Pages)
-1. Create a repository named: `YOUR_USERNAME.github.io`
-2. Upload these files to the repo (or push with git).
-3. On GitHub: **Settings → Pages → Deploy from branch → main / root**
-4. Visit: `https://YOUR_USERNAME.github.io`
+The site is intentionally simple and privacy-conscious. It provides a small public presence with sections for Home, Blog, and Contact.
 
-## Customize
-- Edit your name/links: `index.html` (top hero + quick links)
-- Edit project cards: `projects.html`
-- Edit publication list: `publications.html`
-- Edit CV page: `cv.html`
-- Replace PDF: `assets/files/CV.pdf`
+## Editing
 
-## Notes
-- GitHub Pages is static hosting, so the contact form is disabled by default.
-  If you want a working form later, use Formspree or Netlify Forms.
+- Edit `index.html` to update the website.
+- Keep public content broad, professional, and low-exposure.
+- Avoid adding private affiliations, detailed biography, CV material, or sensitive personal information.
