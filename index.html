@@ -3,755 +3,327 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A minimal public website for selected thoughts on engineering, science, technology, and public policy." />
   <title>Negasi Teklay Weldesemat</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg:        #F8F7F4;
-      --surface:   #FFFFFF;
-      --text:      #1C1C1A;
-      --muted:     #6B6B65;
-      --accent:    #2A5C45;
-      --accent-lt: #E8F0EC;
-      --border:    #E2E1DC;
-      --max:       860px;
-      --serif:     'Cormorant Garamond', Georgia, serif;
-      --sans:      'DM Sans', system-ui, sans-serif;
+      --bg: #f8f7f3;
+      --surface: #ffffff;
+      --text: #1f2328;
+      --muted: #667085;
+      --line: #e5e7eb;
+      --accent: #2f5d50;
+      --accent-soft: #edf4f1;
+      --max: 920px;
     }
 
-    html { scroll-behavior: smooth; }
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
+      margin: 0;
       background: var(--bg);
       color: var(--text);
-      font-family: var(--sans);
-      font-size: 16px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.7;
-      font-weight: 300;
+      font-size: 16px;
     }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(248,247,244,0.88);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+    a {
+      color: var(--accent);
+      text-decoration: none;
     }
-    nav .inner {
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(248, 247, 243, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 0 2rem;
-      height: 58px;
+      padding: 1rem 1.25rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 1rem;
     }
-    .nav-name {
-      font-family: var(--serif);
-      font-weight: 500;
-      font-size: 1.05rem;
-      letter-spacing: 0.01em;
+
+    .brand {
+      font-weight: 650;
+      letter-spacing: -0.02em;
       color: var(--text);
-      text-decoration: none;
     }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      font-size: 0.92rem;
+    }
+
     .nav-links a {
-      font-size: 0.825rem;
-      font-weight: 400;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
       color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
     }
-    .nav-links a:hover { color: var(--accent); }
 
-    /* ── SECTIONS ── */
-    section { padding: 100px 2rem 80px; max-width: var(--max); margin: 0 auto; }
-    section:first-of-type { padding-top: 140px; }
+    .nav-links a:hover {
+      color: var(--accent);
+    }
 
-    .section-label {
-      font-size: 0.7rem;
-      font-weight: 500;
+    main {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    section {
+      padding: 4.5rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    section:last-of-type {
+      border-bottom: 0;
+    }
+
+    .hero {
+      padding-top: 6rem;
+    }
+
+    .eyebrow {
+      margin: 0 0 1rem;
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 2.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .section-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
     }
 
-    /* ── HERO ── */
-    #about { border-bottom: 1px solid var(--border); }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 4rem;
-      align-items: start;
-    }
-    .hero-meta { padding-top: 0.5rem; }
-    .avatar-wrap {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 2px solid var(--border);
-      overflow: hidden;
-      margin-bottom: 1.5rem;
-      background: var(--accent-lt);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--serif);
-      font-size: 2.4rem;
-      color: var(--accent);
-    }
-    .hero-name {
-      font-family: var(--serif);
-      font-size: 2.6rem;
-      font-weight: 500;
-      line-height: 1.15;
-      margin-bottom: 0.4rem;
-    }
-    .hero-title {
-      font-size: 0.9rem;
-      color: var(--muted);
-      margin-bottom: 0.2rem;
-    }
-    .hero-inst {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--accent);
-      margin-bottom: 1.6rem;
-    }
-    .hero-links { display: flex; flex-direction: column; gap: 0.4rem; }
-    .hero-links a {
-      font-size: 0.82rem;
-      color: var(--muted);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: color 0.2s;
-    }
-    .hero-links a:hover { color: var(--accent); }
-    .hero-links svg { flex-shrink: 0; }
-
-    .hero-bio h2 {
-      font-family: var(--serif);
-      font-size: 1.7rem;
-      font-weight: 400;
-      font-style: italic;
-      margin-bottom: 1.2rem;
-      line-height: 1.3;
-      color: var(--text);
-    }
-    .hero-bio p {
-      color: var(--muted);
-      font-size: 0.95rem;
-      margin-bottom: 0.9rem;
+    h1, h2, h3 {
+      margin: 0;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
     }
 
-    .tag-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.4rem; }
-    .tag {
-      background: var(--accent-lt);
-      color: var(--accent);
-      font-size: 0.75rem;
-      font-weight: 400;
-      letter-spacing: 0.04em;
-      padding: 0.3rem 0.75rem;
-      border-radius: 999px;
+    h1 {
+      max-width: 780px;
+      font-size: clamp(2.4rem, 6vw, 4.9rem);
+      font-weight: 720;
     }
 
-    /* ── RESEARCH ── */
-    #research { border-bottom: 1px solid var(--border); }
-    .research-intro {
-      font-size: 0.95rem;
-      color: var(--muted);
-      max-width: 640px;
-      margin-bottom: 3rem;
-    }
-    .project-list { display: flex; flex-direction: column; gap: 0; }
-    .project-item {
-      display: grid;
-      grid-template-columns: 90px 1fr;
-      gap: 1.5rem;
-      padding: 1.6rem 0;
-      border-bottom: 1px solid var(--border);
-      align-items: start;
-    }
-    .project-item:last-child { border-bottom: none; }
-    .project-years {
-      font-size: 0.78rem;
-      color: var(--muted);
-      padding-top: 0.25rem;
-    }
-    .project-title {
-      font-family: var(--serif);
-      font-size: 1.1rem;
-      font-weight: 500;
-      margin-bottom: 0.35rem;
-      line-height: 1.35;
-    }
-    .project-role {
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
-    .project-fund {
-      display: inline-block;
-      margin-top: 0.4rem;
-      font-size: 0.72rem;
-      color: var(--accent);
-      letter-spacing: 0.04em;
-    }
-
-    /* ── PUBLICATIONS ── */
-    #publications { border-bottom: 1px solid var(--border); }
-    .pub-list { display: flex; flex-direction: column; }
-    .pub-year-group { margin-bottom: 2.8rem; }
-    .pub-year {
-      font-family: var(--serif);
-      font-size: 1.4rem;
-      font-weight: 300;
-      color: var(--muted);
+    h2 {
+      font-size: clamp(1.7rem, 3vw, 2.35rem);
       margin-bottom: 1rem;
     }
-    .pub-item {
-      padding: 1.2rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .pub-item:last-child { border-bottom: none; }
-    .pub-title {
-      font-family: var(--serif);
+
+    h3 {
       font-size: 1.05rem;
-      font-weight: 500;
-      line-height: 1.4;
-      margin-bottom: 0.4rem;
-    }
-    .pub-authors {
-      font-size: 0.82rem;
-      color: var(--muted);
-      margin-bottom: 0.25rem;
-    }
-    .pub-venue {
-      font-size: 0.8rem;
-      color: var(--accent);
-      font-style: italic;
-    }
-    .pub-status {
-      display: inline-block;
-      background: #FFF4E5;
-      color: #92400E;
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      padding: 0.15rem 0.6rem;
-      border-radius: 999px;
-      margin-left: 0.5rem;
-      vertical-align: middle;
+      margin-bottom: 0.35rem;
     }
 
-    /* ── CV ── */
-    #cv { border-bottom: 1px solid var(--border); }
-    .cv-section { margin-bottom: 3rem; }
-    .cv-section-title {
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text);
-      margin-bottom: 1.2rem;
-    }
-    .cv-row {
-      display: grid;
-      grid-template-columns: 130px 1fr;
-      gap: 1.5rem;
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--border);
-      align-items: start;
-    }
-    .cv-row:last-child { border-bottom: none; }
-    .cv-date { font-size: 0.8rem; color: var(--muted); padding-top: 0.2rem; }
-    .cv-entry-title {
-      font-family: var(--serif);
-      font-size: 1.05rem;
-      font-weight: 500;
-      margin-bottom: 0.15rem;
-    }
-    .cv-entry-sub {
-      font-size: 0.85rem;
+    .lead {
+      max-width: 700px;
+      margin: 1.25rem 0 0;
       color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.22rem);
     }
-    .cv-entry-detail {
-      font-size: 0.82rem;
-      color: var(--muted);
-      margin-top: 0.2rem;
-    }
-    .cv-download {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-top: 1.5rem;
-      padding: 0.65rem 1.4rem;
-      background: var(--accent);
-      color: #fff;
-      text-decoration: none;
-      font-size: 0.82rem;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      border-radius: 4px;
-      transition: opacity 0.2s;
-    }
-    .cv-download:hover { opacity: 0.85; }
 
-    .skills-grid {
+    .summary-card {
+      margin-top: 2.2rem;
+      max-width: 760px;
+      padding: 1.35rem;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 18px 50px rgba(31, 35, 40, 0.04);
+    }
+
+    .tag-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 0.5rem;
+      gap: 0.55rem;
+      margin-top: 1.2rem;
     }
-    .skill-pill {
-      font-size: 0.8rem;
-      padding: 0.3rem 0.8rem;
-      border: 1px solid var(--border);
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.35rem 0.7rem;
       border-radius: 999px;
-      color: var(--muted);
-    }
-
-    /* ── CONTACT ── */
-    #contact { border-bottom: none; }
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: start;
-    }
-    .contact-tagline {
-      font-family: var(--serif);
-      font-size: 1.9rem;
-      font-weight: 400;
-      font-style: italic;
-      line-height: 1.3;
-      margin-bottom: 1.2rem;
-    }
-    .contact-blurb { font-size: 0.9rem; color: var(--muted); }
-    .contact-items { display: flex; flex-direction: column; gap: 1.4rem; }
-    .contact-item { display: flex; flex-direction: column; gap: 0.2rem; }
-    .contact-label {
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .contact-val {
-      font-size: 0.95rem;
-      color: var(--text);
-    }
-    .contact-val a {
+      background: var(--accent-soft);
       color: var(--accent);
-      text-decoration: none;
+      font-size: 0.86rem;
     }
-    .contact-val a:hover { text-decoration: underline; }
 
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem;
-      text-align: center;
-      font-size: 0.78rem;
+    .section-intro {
+      max-width: 680px;
+      color: var(--muted);
+      margin: 0 0 2rem;
+    }
+
+    .post-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .post-card {
+      padding: 1.25rem;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+
+    .post-meta {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .post-card p {
+      color: var(--muted);
+      margin: 0.45rem 0 0;
+    }
+
+    .contact-box {
+      max-width: 680px;
+      padding: 1.35rem;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+    }
+
+    .contact-box p {
+      margin: 0 0 1rem;
       color: var(--muted);
     }
 
-    /* ── FADE IN ── */
-    .fade { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
-    .fade.visible { opacity: 1; transform: none; }
+    .email-placeholder {
+      display: inline-block;
+      padding: 0.65rem 0.85rem;
+      border: 1px dashed var(--line);
+      border-radius: 10px;
+      color: var(--muted);
+      background: #fbfaf8;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 0.92rem;
+    }
 
-    /* ── RESPONSIVE ── */
+    footer {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 2rem 1.25rem 3rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
     @media (max-width: 640px) {
-      .hero-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .project-item, .cv-row { grid-template-columns: 1fr; gap: 0.4rem; }
-      .project-years, .cv-date { padding-top: 0; }
-      .nav-links { gap: 1.2rem; }
-      .hero-name { font-size: 2rem; }
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .hero {
+        padding-top: 4rem;
+      }
+
+      section {
+        padding: 3.5rem 0;
+      }
     }
   </style>
 </head>
 <body>
-
-<!-- NAV -->
-<nav>
-  <div class="inner">
-    <a href="#about" class="nav-name">Negasi T. Weldesemat</a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#research">Research</a></li>
-      <li><a href="#publications">Publications</a></li>
-      <li><a href="#cv">CV</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </div>
-</nav>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-label">About</div>
-  <div class="hero-grid fade">
-    <div class="hero-meta">
-      <div class="avatar-wrap">NT</div>
-      <div class="hero-name">Negasi Teklay<br>Weldesemat</div>
-      <div class="hero-title">PhD Candidate</div>
-      <div class="hero-inst">DGIST, Daegu, South Korea</div>
-      <div class="hero-links">
-        <a href="mailto:negasi@dgist.ac.kr">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
-          negasi@dgist.ac.kr
-        </a>
-        <a href="#">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Daegu, South Korea
-        </a>
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="brand" href="#home">Negasi Teklay Weldesemat</a>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#blog">Blog</a>
+        <a href="#contact">Contact</a>
       </div>
-    </div>
-    <div class="hero-bio">
-      <h2>Designing molecules with machine learning to power the next generation of semiconductors.</h2>
-      <p>
-        I am a PhD student in Energy Science and Engineering at DGIST, where I develop machine learning and high-throughput computational approaches for the rational design and synthesis of <em>N-type redox-active molecules</em> for semiconducting devices.
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <p class="eyebrow">Public website</p>
+      <h1>Engineering, science, technology, and public policy.</h1>
+      <p class="lead">
+        This site shares selected public thoughts on chemical engineering, chemistry, materials science,
+        artificial intelligence, robotics, quantum technologies, and policy.
       </p>
-      <p>
-        My work sits at the intersection of materials chemistry, electrochemistry, and data science. During my MSc at Myongji University, I developed electroactive composite materials for the selective electrochemical recovery of critical metals — lithium, silver, cesium, palladium, and platinum — from industrial and environmental sources.
-      </p>
-      <p>
-        I enjoy bridging experiment and computation: from stimuli-responsives/semiconductor materials to smart/electronic devices to Python-based ML workflows and density functional theory.
-      </p>
-      <div class="tag-row">
-        <span class="tag">Machine Learning for Materials</span>
-        <span class="tag">N-Type Organic Semiconductors</span>
-        <span class="tag">Electrochemistry</span>
-        <span class="tag">Ion Recovery</span>
-        <span class="tag">Redox-Active Molecules</span>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- RESEARCH -->
-<section id="research">
-  <div class="section-label">Research</div>
-  <p class="research-intro fade">
-    My research spans computational materials design, electrochemical separation, and smart responsive materials. Below are selected funded projects I have contributed to.
-  </p>
-  <div class="project-list">
-
-    <div class="project-item fade">
-      <div class="project-years">2025 –<br>Present</div>
-      <div>
-        <div class="project-title">Machine Learning &amp; High-Throughput Design of N-Type Redox-Active Molecules for Semiconducting Devices</div>
-        <div class="project-role">PhD Research — DGIST, Daegu, South Korea</div>
-        <span class="project-fund">PhD Thesis</span>
-      </div>
-    </div>
-
-    <div class="project-item fade">
-      <div class="project-years">2023 – 2025</div>
-      <div>
-        <div class="project-title">Hyper-Crosslinked Adsorbents Based on High-Affinity Ligands for Selective Metal Recovery via Ligand–Metal Complexation</div>
-        <div class="project-role">Graduate Student Researcher — Myongji University</div>
-        <span class="project-fund">NRF of Korea</span>
-      </div>
-    </div>
-
-    <div class="project-item fade">
-      <div class="project-years">2021 – 2025</div>
-      <div>
-        <div class="project-title">Sequential Eco-Friendly Separation of Valuable Metals Using Thermo- and Electroresponsive Molecules without Secondary Waste</div>
-        <div class="project-role">Graduate Student Researcher — Myongji University</div>
-        <span class="project-fund">NRF of Korea · No. 2021R1A2C2093746</span>
-      </div>
-    </div>
-
-    <div class="project-item fade">
-      <div class="project-years">2021 – 2023</div>
-      <div>
-        <div class="project-title">Eco-Friendly Separation of Radioactive Cs<sup>+</sup> Using Photo-Responsive and Ion-Recognition Molecules</div>
-        <div class="project-role">Graduate Student Researcher — Myongji University</div>
-        <span class="project-fund">NRF of Korea · No. 2021R1H1A200828411</span>
-      </div>
-    </div>
-
-    <div class="project-item fade">
-      <div class="project-years">2022 – 2023</div>
-      <div>
-        <div class="project-title">Thin-Film Composite Forward Osmosis Membrane with 2D Nanosheets for Seawater Desalination</div>
-        <div class="project-role">Graduate Student Researcher — Myongji University</div>
-        <span class="project-fund">NRF of Korea</span>
-      </div>
-    </div>
-
-    <div class="project-item fade">
-      <div class="project-years">2020 – 2021</div>
-      <div>
-        <div class="project-title">Tailor-Made Hybrid Smart Materials for Selective Separation of Precious Metals from Electronic Waste</div>
-        <div class="project-role">Graduate Student Researcher — Myongji University</div>
-        <span class="project-fund">NRF of Korea · No. 2017R1A2B2002109</span>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- PUBLICATIONS -->
-<section id="publications">
-  <div class="section-label">Publications</div>
-
-  <div class="pub-list">
-
-    <div class="pub-year-group fade">
-      <div class="pub-year">2024</div>
-
-      <div class="pub-item">
-        <div class="pub-title">Thiolated Hyper-Crosslinked Tetraphenylborate with Tunable Selectivity for Sequential Recovery of Pd and Pt from Autocatalyst Leachate</div>
-        <div class="pub-authors">N. T. Weldesemat et al.</div>
-        <div class="pub-venue">Journal article, 2024</div>
-      </div>
-
-      <div class="pub-item">
-        <div class="pub-title">"Knitted" Tetrabenzo-24-Crown-8 Ether Sulfonate as a Reusable Hydrophilic Adsorbent for Aqueous Cs<sup>+</sup> Sequestration</div>
-        <div class="pub-authors">N. T. Weldesemat et al.</div>
-        <div class="pub-venue">Journal article, 2024</div>
-      </div>
-    </div>
-
-    <div class="pub-year-group fade">
-      <div class="pub-year">2023</div>
-
-      <div class="pub-item">
-        <div class="pub-title">Carbonyl-Interfaced Biochar Derived from Unique Capillary Structures via One-Step Carbonization with Selective Methyl Blue Adsorption</div>
-        <div class="pub-authors">N. T. Weldesemat et al.</div>
-        <div class="pub-venue">Journal article, 2023</div>
-      </div>
-    </div>
-
-    <div class="pub-year-group fade">
-      <div class="pub-year">In Preparation</div>
-
-      <div class="pub-item">
-        <div class="pub-title">
-          Smart Composite Material (TCE@GO@PPy) Based on Thia-Crown Ether and Polypyrrole for Electrochemical-Assisted Ag<sup>+</sup> Removal from Wastewater
-          <span class="pub-status">Ready for Submission</span>
+      <div class="summary-card" aria-label="Areas of interest">
+        <p>
+          A minimal space for broad technical reflection, public commentary, and occasional announcements
+          across science, engineering, technology, and public policy.
+        </p>
+        <div class="tag-list">
+          <span class="tag">Engineering</span>
+          <span class="tag">Science</span>
+          <span class="tag">Technology</span>
+          <span class="tag">Chemical Engineering</span>
+          <span class="tag">Chemistry</span>
+          <span class="tag">Materials Science</span>
+          <span class="tag">Artificial Intelligence</span>
+          <span class="tag">Robotics</span>
+          <span class="tag">Quantum Technologies</span>
+          <span class="tag">Scientific Computing</span>
+          <span class="tag">Science Policy</span>
         </div>
-        <div class="pub-authors">Negasi T. Weldesemat, Anteneh F. Baye, Hern Kim</div>
-        <div class="pub-venue">Target: ACS Applied Materials &amp; Interfaces</div>
       </div>
+    </section>
 
-      <div class="pub-item">
-        <div class="pub-title">
-          Aqueous-Stable Low-Ni Li(Ni<sub>x</sub>Mn<sub>y</sub>Co<sub>z</sub>)O<sub>2</sub> for Optimal Lithium Extraction: Structural and Electrochemical Properties
-          <span class="pub-status">Manuscript in Preparation</span>
-        </div>
-        <div class="pub-authors">Negasi T. Weldesemat, Anteneh F. Baye, Hern Kim</div>
-        <div class="pub-venue">Target: Journal of Power Sources</div>
+    <section id="blog">
+      <p class="eyebrow">Blog</p>
+      <h2>Selected writing and updates</h2>
+      <p class="section-intro">
+        Selected posts may include general commentary, technical reflections, announcements, and opinion pieces
+        across science, engineering, technology, and public policy.
+      </p>
+
+      <div class="post-list">
+        <article class="post-card">
+          <div class="post-meta">Pinned note</div>
+          <h3>Posts will appear here</h3>
+          <p>
+            This section is prepared for short essays, public updates, policy criticism, news commentary,
+            and technical notes. Add new entries by editing this part of <code>index.html</code> or by
+            moving to a lightweight static-site format later.
+          </p>
+        </article>
       </div>
-    </div>
+    </section>
 
-  </div>
-
-  <!-- Conferences note -->
-  <div class="fade" style="margin-top: 2rem; padding: 1.2rem 1.5rem; border: 1px solid var(--border); border-radius: 6px; background: var(--surface);">
-    <div style="font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; color: var(--muted); margin-bottom: 0.5rem;">Selected Conferences</div>
-    <p style="font-size: 0.85rem; color: var(--muted); line-height: 1.6;">
-      Presented at KECS Spring &amp; Fall Meetings (2021–2024), KICHE General Assembly (2023), KSEE National Conference (2021–2022), and AIChE Annual Meeting 2022, Phoenix, AZ, USA.
-    </p>
-  </div>
-
-</section>
-
-<!-- CV -->
-<section id="cv">
-  <div class="section-label">Curriculum Vitae</div>
-
-  <div class="cv-section fade">
-    <div class="cv-section-title">Education</div>
-
-    <div class="cv-row">
-      <div class="cv-date">2025 – Present</div>
-      <div>
-        <div class="cv-entry-title">PhD in Energy Science and Engineering</div>
-        <div class="cv-entry-sub">DGIST, Daegu, South Korea</div>
-        <div class="cv-entry-detail">Thesis: Developing Machine Learning and High-Throughput Approaches for the Design and Synthesis of N-Type Redox-Active Molecules for Semiconducting Devices</div>
+    <section id="contact">
+      <p class="eyebrow">Contact</p>
+      <h2>Contact</h2>
+      <div class="contact-box">
+        <p>For general academic, technical, or professional communication, contact me by email.</p>
+        <span class="email-placeholder">Replace with a public email address</span>
       </div>
-    </div>
+    </section>
+  </main>
 
-    <div class="cv-row">
-      <div class="cv-date"> 2020 – 2025</div>
-      <div>
-        <div class="cv-entry-title"> Doctoral Studies in Energy Science and Technology; M.Sc. Awarded </div>
-        <div class="cv-entry-sub">Myongji University, Yongin, South Korea</div>
-        <div class="cv-entry-detail">GPA: 4.38 / 4.5 · Thesis: Development of Electroactive Composite Materials toward Electrochemical Extraction and Recovery of Lithium and Silver Ions</div>
-      </div>
-    </div>
-
-    <div class="cv-row">
-      <div class="cv-date">2019</div>
-      <div>
-        <div class="cv-entry-title">BSc in Chemical Engineering</div>
-        <div class="cv-entry-sub">Mekelle Institute of Technology, Mekelle University, Ethiopia</div>
-        <div class="cv-entry-detail">GPA: 3.93 / 4.00</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="cv-section fade">
-    <div class="cv-section-title">Experience</div>
-
-    <div class="cv-row">
-      <div class="cv-date">2020 – 2025</div>
-      <div>
-        <div class="cv-entry-title">Research Assistant</div>
-        <div class="cv-entry-sub">Dept. of Energy Science &amp; Technology, Myongji University</div>
-        <div class="cv-entry-detail">Synthesis of organic compounds (crown ether derivatives), fabrication of conducting polymers, coin-cell assembly, electrospinning, SEM, FTIR, UV-Vis, BET, ICP-MS.</div>
-      </div>
-    </div>
-
-    <div class="cv-row">
-      <div class="cv-date">2017 – 2018</div>
-      <div>
-        <div class="cv-entry-title">Chemical Engineering Intern</div>
-        <div class="cv-entry-sub">Almeda Textile PLC (ALTEX), Adwa, Ethiopia</div>
-        <div class="cv-entry-detail">Process control systems, analog/digital signals, industrial safety and maintenance protocols.</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="cv-section fade">
-    <div class="cv-section-title">Certifications</div>
-    <div class="cv-row">
-      <div class="cv-date">2022 – 2023</div>
-      <div>
-        <div class="cv-entry-title">Machine Learning Specialization</div>
-        <div class="cv-entry-sub">Coursera (DeepLearning.AI)</div>
-      </div>
-    </div>
-    <div class="cv-row">
-      <div class="cv-date">2023</div>
-      <div>
-        <div class="cv-entry-title">Density Functional Theory</div>
-        <div class="cv-entry-sub">Coursera</div>
-      </div>
-    </div>
-    <div class="cv-row">
-      <div class="cv-date">2022 – 2023</div>
-      <div>
-        <div class="cv-entry-title">Python for Data Science &amp; AI</div>
-        <div class="cv-entry-sub">Coursera</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="cv-section fade">
-    <div class="cv-section-title">Technical Skills</div>
-    <div class="skills-grid">
-      <span class="skill-pill">Python</span>
-      <span class="skill-pill">Machine Learning</span>
-      <span class="skill-pill">MATLAB</span>
-      <span class="skill-pill">C Programming</span>
-      <span class="skill-pill">ChemDraw</span>
-      <span class="skill-pill">Design-Expert</span>
-      <span class="skill-pill">Simulink</span>
-      <span class="skill-pill">Adobe Illustrator</span>
-      <span class="skill-pill">EdrawMax</span>
-      <span class="skill-pill">Electrospinning</span>
-      <span class="skill-pill">SEM</span>
-      <span class="skill-pill">FTIR</span>
-      <span class="skill-pill">ICP-MS</span>
-      <span class="skill-pill">XRD</span>
-      <span class="skill-pill">Coin-Cell Assembly</span>
-      <span class="skill-pill">ReRAM Fabrication</span>
-      <span class="skill-pill">Monday.com</span>
-    </div>
-  </div>
-
-  <div class="fade">
-    <a href="20250930_CV.pdf" class="cv-download" download>
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      Download Full CV (PDF)
-    </a>
-    <p style="font-size: 0.78rem; color: var(--muted); margin-top: 0.75rem;">Place your CV PDF in the same folder as index.html and rename it to <code>20250930_CV.pdf</code></p>
-  </div>
-
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="section-label">Contact</div>
-  <div class="contact-grid fade">
-    <div>
-      <div class="contact-tagline">Let's connect and collaborate.</div>
-      <p class="contact-blurb">I'm open to discussions on ML-driven materials discovery, electrochemical separation, and research collaborations. Feel free to reach out.</p>
-    </div>
-    <div class="contact-items">
-      <div class="contact-item">
-        <span class="contact-label">Primary Email</span>
-        <span class="contact-val"><a href="mailto:negasi@dgist.ac.kr">negasi@dgist.ac.kr</a></span>
-      </div>
-      <div class="contact-item">
-        <span class="contact-label">Phone</span>
-        <span class="contact-val">+82 10 2150 1087</span>
-      </div>
-      <div class="contact-item">
-        <span class="contact-label">Location</span>
-        <span class="contact-val">DGIST, Daegu, South Korea</span>
-      </div>
-      <div class="contact-item">
-        <span class="contact-label">Institution</span>
-        <span class="contact-val"><a href="https://www.dgist.ac.kr/energy/" target="_blank" rel="noopener">dgist.ac.kr/energy</a></span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  © 2025 Negasi Teklay Weldesemat · DGIST, Daegu, South Korea
-</footer>
-
-<script>
-  // Intersection Observer for fade-in
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.08 });
-
-  document.querySelectorAll('.fade').forEach(el => observer.observe(el));
-
-  // Active nav link highlight
-  const sections = document.querySelectorAll('section[id]');
-  const links = document.querySelectorAll('.nav-links a');
-  const spy = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        links.forEach(l => l.style.color = '');
-        const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
-        if (active) active.style.color = 'var(--accent)';
-      }
-    });
-  }, { rootMargin: '-40% 0px -55% 0px' });
-  sections.forEach(s => spy.observe(s));
-</script>
+  <footer>
+    © 2026 Negasi Teklay Weldesemat
+  </footer>
 </body>
 </html>
