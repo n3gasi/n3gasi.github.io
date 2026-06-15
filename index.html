@@ -7,12 +7,24 @@
   <title>Negasi</title>
   <style>
     :root {
+      color-scheme: light;
       --bg: #fbfaf7;
       --text: #20201d;
       --muted: #6b6a64;
       --line: #e7e2d8;
       --accent: #20201d;
+      --header-bg: rgba(251, 250, 247, 0.94);
       --max: 820px;
+    }
+
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #141412;
+      --text: #f2eee6;
+      --muted: #b7b0a4;
+      --line: #38342e;
+      --accent: #f2eee6;
+      --header-bg: rgba(20, 20, 18, 0.92);
     }
 
     * {
@@ -30,6 +42,7 @@
       font-family: Georgia, Cambria, serif;
       line-height: 1.72;
       font-size: 17px;
+      transition: background 180ms ease, color 180ms ease;
     }
 
     a {
@@ -47,7 +60,7 @@
       position: sticky;
       top: 0;
       z-index: 10;
-      background: rgba(251, 250, 247, 0.94);
+      background: var(--header-bg);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--line);
     }
@@ -75,10 +88,29 @@
     .nav-links {
       display: flex;
       flex-wrap: wrap;
+      align-items: baseline;
       justify-content: flex-end;
       gap: 0.95rem;
       color: var(--muted);
       font-size: 0.94rem;
+    }
+
+    .theme-toggle {
+      appearance: none;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.86rem;
+      line-height: 1;
+      padding: 0.38rem 0.7rem;
+    }
+
+    .theme-toggle:hover {
+      color: var(--text);
+      border-color: var(--muted);
     }
 
     main {
@@ -299,6 +331,14 @@
       }
     }
   </style>
+  <script>
+    (function () {
+      var savedTheme = localStorage.getItem("theme");
+      var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      var theme = savedTheme || (prefersDark ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
 </head>
 <body>
   <header class="site-header">
@@ -308,6 +348,7 @@
         <a href="#home">Intro</a>
         <a href="#blog">Blog</a>
         <a href="#research">Research</a>
+        <button class="theme-toggle" type="button" aria-label="Switch color theme">Dark</button>
       </div>
     </nav>
   </header>
@@ -358,5 +399,29 @@
       <span><a href="mailto:your.email@example.com">Email</a></span>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      var toggle = document.querySelector(".theme-toggle");
+      if (!toggle) return;
+
+      function syncToggle(theme) {
+        var isDark = theme === "dark";
+        toggle.textContent = isDark ? "Light" : "Dark";
+        toggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+      }
+
+      var currentTheme = document.documentElement.getAttribute("data-theme") || "light";
+      syncToggle(currentTheme);
+
+      toggle.addEventListener("click", function () {
+        var activeTheme = document.documentElement.getAttribute("data-theme") || "light";
+        var nextTheme = activeTheme === "dark" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", nextTheme);
+        localStorage.setItem("theme", nextTheme);
+        syncToggle(nextTheme);
+      });
+    })();
+  </script>
 </body>
 </html>
