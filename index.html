@@ -223,9 +223,20 @@
     footer {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 2rem 1.25rem 3rem;
+      padding: 2.35rem 1.25rem 3rem;
+      border-top: 1px solid var(--line);
       font-size: 0.94rem;
       text-align: center;
+    }
+
+    footer::before {
+      content: "";
+      display: block;
+      width: 2.75rem;
+      height: 1px;
+      margin: 0 auto 1.15rem;
+      background: var(--text);
+      opacity: 0.28;
     }
 
     @media (max-width: 640px) {
