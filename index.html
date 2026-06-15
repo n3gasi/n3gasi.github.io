@@ -88,7 +88,7 @@
     .nav-links {
       display: flex;
       flex-wrap: wrap;
-      align-items: baseline;
+      align-items: center;
       justify-content: flex-end;
       gap: 0.95rem;
       color: var(--muted);
@@ -97,20 +97,42 @@
 
     .theme-toggle {
       appearance: none;
+      width: 2.55rem;
+      height: 1.32rem;
+      position: relative;
       border: 1px solid var(--line);
       border-radius: 999px;
       background: transparent;
-      color: var(--muted);
       cursor: pointer;
-      font: inherit;
-      font-size: 0.86rem;
-      line-height: 1;
-      padding: 0.38rem 0.7rem;
+      padding: 0;
+      transition: border-color 180ms ease, background 180ms ease;
+    }
+
+    .theme-toggle::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0.22rem;
+      width: 0.82rem;
+      height: 0.82rem;
+      border-radius: 50%;
+      background: var(--muted);
+      transform: translateY(-50%);
+      transition: transform 180ms ease, background 180ms ease;
+    }
+
+    html[data-theme="dark"] .theme-toggle::before {
+      transform: translate(1.18rem, -50%);
+      background: var(--text);
     }
 
     .theme-toggle:hover {
-      color: var(--text);
       border-color: var(--muted);
+    }
+
+    .theme-toggle:focus-visible {
+      outline: 2px solid var(--muted);
+      outline-offset: 3px;
     }
 
     main {
@@ -348,7 +370,7 @@
         <a href="#home">Intro</a>
         <a href="#blog">Blog</a>
         <a href="#research">Research</a>
-        <button class="theme-toggle" type="button" aria-label="Switch color theme">Dark</button>
+        <button class="theme-toggle" type="button" aria-label="Switch color theme" aria-pressed="false"></button>
       </div>
     </nav>
   </header>
@@ -407,8 +429,8 @@
 
       function syncToggle(theme) {
         var isDark = theme === "dark";
-        toggle.textContent = isDark ? "Light" : "Dark";
         toggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+        toggle.setAttribute("aria-pressed", String(isDark));
       }
 
       var currentTheme = document.documentElement.getAttribute("data-theme") || "light";
