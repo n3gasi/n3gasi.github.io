@@ -12,13 +12,12 @@
     a { color:inherit; text-decoration:none; text-underline-offset:.18em; }
     a:hover { text-decoration:underline; }
     .page { max-width:var(--max); margin:0 auto; padding:3rem 1.25rem 5rem; }
-    .back-link,.post-date,.image-status { color:var(--muted); font-size:.94rem; }
+    .back-link,.post-date { color:var(--muted); font-size:.94rem; }
     header { padding-bottom:2rem; border-bottom:1px solid var(--line); margin-bottom:2.5rem; }
     h1 { margin:1.25rem 0 .75rem; font-size:clamp(2rem,5vw,3rem); line-height:1.18; font-weight:600; }
     .content-label { margin:0 0 1rem; font-size:1.1rem; font-weight:600; }
     figure { margin:0; }
-    img { display:none; width:100%; height:auto; border-radius:4px; }
-    img.loaded { display:block; }
+    img { display:block; width:100%; height:auto; border-radius:4px; }
     @media (max-width:420px) { body{font-size:16px}.page{padding-left:1rem;padding-right:1rem} }
   </style>
 </head>
@@ -33,40 +32,9 @@
     <article>
       <p class="content-label">AI Hackathon</p>
       <figure>
-        <p class="image-status" id="image-status">Loading photo…</p>
-        <img id="hackathon-photo" alt="Team photo from the 2026 DGIST AI Build Week AI Hackathon" />
+        <img src="news-ai-build-week-teams.jpeg" alt="Team photo from the 2026 DGIST AI Build Week AI Hackathon" />
       </figure>
     </article>
   </main>
-
-  <script>
-    (async function () {
-      const image = document.getElementById("hackathon-photo");
-      const status = document.getElementById("image-status");
-      const parts = [1, 2, 3, 4, 5].map(function (number) {
-        return "../assets/dgist-hackathon-photo/part-" + String(number).padStart(2, "0") + ".txt";
-      });
-
-      try {
-        const responses = await Promise.all(parts.map(function (path) {
-          return fetch(path, { cache: "no-store" });
-        }));
-        responses.forEach(function (response) {
-          if (!response.ok) throw new Error("Unable to load photo data.");
-        });
-        const chunks = await Promise.all(responses.map(function (response) { return response.text(); }));
-        image.src = "data:image/jpeg;base64," + chunks.join("").replace(/\s+/g, "");
-        image.onload = function () {
-          image.classList.add("loaded");
-          status.remove();
-        };
-        image.onerror = function () {
-          status.textContent = "The photo could not be displayed.";
-        };
-      } catch (error) {
-        status.textContent = "The photo could not be loaded.";
-      }
-    })();
-  </script>
 </body>
 </html>
