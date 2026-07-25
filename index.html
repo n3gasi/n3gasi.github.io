@@ -6,400 +6,44 @@
   <meta name="description" content="A minimal public website for Negasi." />
   <title>Negasi</title>
   <style>
-    :root {
-      color-scheme: light;
-      --bg: #fbfaf7;
-      --text: #20201d;
-      --muted: #6b6a64;
-      --line: #e7e2d8;
-      --accent: #20201d;
-      --header-bg: rgba(251, 250, 247, 0.94);
-      --max: 820px;
-    }
-
-    html[data-theme="dark"] {
-      color-scheme: dark;
-      --bg: #141412;
-      --text: #f2eee6;
-      --muted: #b7b0a4;
-      --line: #38342e;
-      --accent: #f2eee6;
-      --header-bg: rgba(20, 20, 18, 0.92);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: Georgia, Cambria, serif;
-      line-height: 1.72;
-      font-size: 17px;
-      transition: background 180ms ease, color 180ms ease;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-      text-underline-offset: 0.18em;
-    }
-
-    a:hover {
-      color: var(--accent);
-      text-decoration: underline;
-    }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: var(--header-bg);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .nav {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 1rem 1.25rem;
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-
-    .brand {
-      color: var(--text);
-      font-family: inherit;
-      font-size: 1.02rem;
-      font-weight: 600;
-      letter-spacing: 0;
-      line-height: 1;
-      white-space: nowrap;
-    }
-
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 0.95rem;
-      color: var(--muted);
-      font-size: 0.94rem;
-    }
-
-    .theme-toggle {
-      appearance: none;
-      width: 2.55rem;
-      height: 1.32rem;
-      position: relative;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: transparent;
-      cursor: pointer;
-      padding: 0;
-      transition: border-color 180ms ease, background 180ms ease;
-    }
-
-    .theme-toggle::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 0.22rem;
-      width: 0.82rem;
-      height: 0.82rem;
-      border-radius: 50%;
-      background: var(--muted);
-      transform: translateY(-50%);
-      transition: transform 180ms ease, background 180ms ease;
-    }
-
-    html[data-theme="dark"] .theme-toggle::before {
-      transform: translate(1.18rem, -50%);
-      background: var(--text);
-    }
-
-    .theme-toggle:hover {
-      border-color: var(--muted);
-    }
-
-    .theme-toggle:focus-visible {
-      outline: 2px solid var(--muted);
-      outline-offset: 3px;
-    }
-
-    main {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 1.25rem;
-    }
-
-    section {
-      padding: clamp(4rem, 8vw, 5rem) 0;
-      border-bottom: 1px solid var(--line);
-    }
-
-    section:last-of-type {
-      border-bottom: 0;
-    }
-
-    @media (min-width: 641px) {
-      #home {
-        padding-top: 2.75rem;
-        padding-bottom: 3rem;
-      }
-
-      #blog {
-        padding-top: 3rem;
-        padding-bottom: 1.85rem;
-      }
-
-      #research {
-        padding-top: 1.85rem;
-      }
-    }
-
-    .eyebrow {
-      margin: 0 0 0.85rem;
-      color: var(--text);
-      font-size: 1rem;
-      font-weight: 600;
-      letter-spacing: 0;
-      text-transform: none;
-    }
-
-    h1, h2, h3, p {
-      margin-top: 0;
-    }
-
-    h1, h2, h3 {
-      line-height: 1.25;
-      letter-spacing: 0;
-    }
-
-    h1 {
-      max-width: 680px;
-      font-size: clamp(2.8rem, 7vw, 5.4rem);
-      margin-bottom: 1rem;
-    }
-
-    h2 {
-      font-size: clamp(1.8rem, 3vw, 2.5rem);
-      margin-bottom: 1rem;
-    }
-
-    h3 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 0.35rem;
-    }
-
-    .lead,
-    .section-text,
-    .post-summary,
-    footer {
-      color: var(--muted);
-    }
-
-    .lead {
-      max-width: 620px;
-      font-size: clamp(1.05rem, 2vw, 1.18rem);
-    }
-
-    .tag-list,
-    .research-links,
-    .footer-links,
-    .social-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-    }
-
-    .tag-list {
-      margin-top: 1.5rem;
-    }
-
-    .footer-links {
-      justify-content: center;
-      align-items: center;
-      gap: 0.95rem;
-    }
-
-    .social-links {
-      align-items: center;
-      gap: 0.55rem;
-    }
-
-    .social-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 1.7rem;
-      height: 1.7rem;
-      border: 1px solid var(--line);
-      border-radius: 50%;
-      color: var(--muted);
-      transition: border-color 160ms ease, color 160ms ease, transform 160ms ease;
-    }
-
-    .social-link:hover {
-      color: var(--text);
-      border-color: var(--muted);
-      text-decoration: none;
-      transform: translateY(-1px);
-    }
-
-    .social-link svg {
-      width: 0.88rem;
-      height: 0.88rem;
-      fill: currentColor;
-    }
-
-    .research-links {
-      color: var(--muted);
-      font-size: 0.96rem;
-    }
-
-    .tag {
-      color: var(--muted);
-      font-size: 0.96rem;
-    }
-
-    .tag:not(:last-child)::after,
-    .research-links a:not(:last-child)::after,
-    .footer-links > span:not(:last-child)::after {
-      content: "·";
-      margin-left: 0.6rem;
-      color: var(--muted);
-    }
-
-    .post-list {
-      display: grid;
-      gap: 0;
-      margin-top: 1.5rem;
-      border-top: 1px solid var(--line);
-    }
-
-    .post-link {
-      display: grid;
-      grid-template-columns: 8.5rem 1fr;
-      gap: 1.5rem;
-      padding: 1.35rem 0;
-      border-bottom: 0;
-    }
-
-    .post-link:hover {
-      text-decoration: none;
-    }
-
-    .post-link:hover .post-title {
-      text-decoration: underline;
-      text-underline-offset: 0.18em;
-    }
-
-    .post-date {
-      color: var(--muted);
-      font-size: 0.92rem;
-      white-space: nowrap;
-    }
-
-    .post-title {
-      color: var(--text);
-      margin-bottom: 0.35rem;
-    }
-
-    .post-summary {
-      display: -webkit-box;
-      margin-bottom: 0;
-      overflow: hidden;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
-    }
-
-    footer {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 2.35rem 1.25rem 3rem;
-      border-top: 1px solid var(--line);
-      font-size: 0.94rem;
-      text-align: center;
-    }
-
-    footer::before {
-      content: "";
-      display: block;
-      width: 4.5rem;
-      height: 1px;
-      margin: 0 auto 1.15rem;
-      background: var(--text);
-      opacity: 0.28;
-    }
-
-    @media (max-width: 640px) {
-      body {
-        font-size: 16px;
-      }
-
-      .nav {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 0.75rem;
-      }
-
-      .nav-links {
-        justify-content: flex-start;
-      }
-
-      section {
-        padding: 3.75rem 0;
-      }
-
-      #blog {
-        padding-bottom: 2rem;
-      }
-
-      #research {
-        padding-top: 2rem;
-      }
-
-      .post-link {
-        grid-template-columns: 1fr;
-        gap: 0.25rem;
-        padding: 1.2rem 0;
-      }
-    }
-
-    @media (max-width: 420px) {
-      .nav,
-      main,
-      footer {
-        padding-left: 1rem;
-        padding-right: 1rem;
-      }
-
-      .brand {
-        font-size: 1rem;
-      }
-
-      .lead {
-        font-size: 1.04rem;
-      }
-    }
+    :root { color-scheme:light; --bg:#fbfaf7; --text:#20201d; --muted:#6b6a64; --line:#e7e2d8; --accent:#20201d; --header-bg:rgba(251,250,247,.94); --max:820px; }
+    html[data-theme="dark"] { color-scheme:dark; --bg:#141412; --text:#f2eee6; --muted:#b7b0a4; --line:#38342e; --accent:#f2eee6; --header-bg:rgba(20,20,18,.92); }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--bg); color:var(--text); font-family:Georgia,Cambria,serif; line-height:1.72; font-size:17px; transition:background 180ms ease,color 180ms ease; }
+    a { color:inherit; text-decoration:none; text-underline-offset:.18em; }
+    a:hover { color:var(--accent); text-decoration:underline; }
+    .site-header { position:sticky; top:0; z-index:10; background:var(--header-bg); backdrop-filter:blur(12px); border-bottom:1px solid var(--line); }
+    .nav { max-width:var(--max); margin:0 auto; padding:1rem 1.25rem; display:flex; align-items:baseline; justify-content:space-between; gap:1rem; }
+    .brand { font-size:1.02rem; font-weight:600; white-space:nowrap; }
+    .nav-links,.tag-list,.research-links,.footer-links,.social-links { display:flex; flex-wrap:wrap; align-items:center; gap:.75rem; }
+    .nav-links { justify-content:flex-end; color:var(--muted); font-size:.94rem; }
+    .theme-toggle { appearance:none; width:2.55rem; height:1.32rem; position:relative; border:1px solid var(--line); border-radius:999px; background:transparent; cursor:pointer; padding:0; }
+    .theme-toggle::before { content:""; position:absolute; top:50%; left:.22rem; width:.82rem; height:.82rem; border-radius:50%; background:var(--muted); transform:translateY(-50%); transition:transform 180ms ease; }
+    html[data-theme="dark"] .theme-toggle::before { transform:translate(1.18rem,-50%); background:var(--text); }
+    main,footer { max-width:var(--max); margin:0 auto; padding-left:1.25rem; padding-right:1.25rem; }
+    section { padding:clamp(4rem,8vw,5rem) 0; border-bottom:1px solid var(--line); }
+    section:last-of-type { border-bottom:0; }
+    .eyebrow { margin:0 0 .85rem; font-size:1rem; font-weight:600; }
+    .lead,.section-text,.post-summary,footer,.post-date,.tag,.research-links { color:var(--muted); }
+    .lead { max-width:620px; font-size:clamp(1.05rem,2vw,1.18rem); }
+    .tag-list { margin-top:1.5rem; }
+    .tag:not(:last-child)::after,.research-links a:not(:last-child)::after { content:"·"; margin-left:.75rem; }
+    .post-list { display:grid; margin-top:1.5rem; border-top:1px solid var(--line); }
+    .post-link { display:grid; grid-template-columns:8.5rem 1fr; gap:1.5rem; padding:1.35rem 0; }
+    .post-link + .post-link { border-top:1px solid var(--line); }
+    .post-link:hover { text-decoration:none; }
+    .post-link:hover .post-title { text-decoration:underline; }
+    .post-date { font-size:.92rem; white-space:nowrap; }
+    .post-title { margin:0 0 .35rem; font-size:1rem; }
+    .post-summary { margin:0; display:-webkit-box; overflow:hidden; -webkit-box-orient:vertical; -webkit-line-clamp:2; }
+    footer { padding-top:2.35rem; padding-bottom:3rem; border-top:1px solid var(--line); font-size:.94rem; text-align:center; }
+    .footer-links { justify-content:center; }
+    @media (min-width:641px) { #home{padding-top:2.75rem;padding-bottom:3rem} #blog{padding-top:3rem;padding-bottom:1.85rem} #research{padding-top:1.85rem} }
+    @media (max-width:640px) { body{font-size:16px}.nav{align-items:flex-start;flex-direction:column}.nav-links{justify-content:flex-start}.post-link{grid-template-columns:1fr;gap:.25rem} }
   </style>
   <script>
-    (function () {
-      var savedTheme = localStorage.getItem("theme");
-      var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      var theme = savedTheme || (prefersDark ? "dark" : "light");
-      document.documentElement.setAttribute("data-theme", theme);
-    })();
+    (function(){var saved=localStorage.getItem("theme");var dark=window.matchMedia("(prefers-color-scheme: dark)").matches;document.documentElement.setAttribute("data-theme",saved||(dark?"dark":"light"));})();
   </script>
 </head>
 <body>
@@ -407,9 +51,7 @@
     <nav class="nav" aria-label="Primary navigation">
       <a class="brand" href="#home">Negasi</a>
       <div class="nav-links">
-        <a href="#home">Intro</a>
-        <a href="#blog">Blog</a>
-        <a href="#research">Research</a>
+        <a href="#home">Intro</a><a href="#blog">Blog</a><a href="#research">Research</a>
         <button class="theme-toggle" type="button" aria-label="Switch color theme" aria-pressed="false"></button>
       </div>
     </nav>
@@ -419,20 +61,22 @@
     <section id="home">
       <p class="eyebrow">Intro</p>
       <p class="lead">Connecting the dots!</p>
-
       <div class="tag-list" aria-label="Focus areas">
-        <span class="tag">Material Chemistry</span>
-        <span class="tag">AI</span>
-        <span class="tag">Quantum</span>
-        <span class="tag">Electronics</span>
+        <span class="tag">Material Chemistry</span><span class="tag">AI</span><span class="tag">Quantum</span><span class="tag">Electronics</span>
       </div>
     </section>
 
     <section id="blog">
       <p class="eyebrow">Blog</p>
       <p class="section-text">Notes, updates, opinions.</p>
-
       <div class="post-list" aria-label="Recent posts">
+        <a class="post-link" href="posts/2026-dgist-ai-build-hackathon.html" target="_blank" rel="noopener noreferrer">
+          <time class="post-date" datetime="2026-07-24">July 24, 2026</time>
+          <div>
+            <h3 class="post-title">The 2026 DGIST AI Build Week “AI Hackathon!”</h3>
+            <p class="post-summary">A short reflection on building, collaborating, and learning during the 2026 DGIST AI Build Week hackathon.</p>
+          </div>
+        </a>
         <a class="post-link" href="posts/ai-and-democratic-access.html" target="_blank" rel="noopener noreferrer">
           <time class="post-date" datetime="2026-06-13">June 13, 2026</time>
           <div>
@@ -453,48 +97,9 @@
     </section>
   </main>
 
-  <footer>
-    <div class="footer-links">
-      <span>© 2026 Negasi</span>
-      <span class="social-links" aria-label="Social links">
-        <a class="social-link" href="mailto:your.email@example.com" aria-label="Email">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3V5Zm2.1 2 6.9 5 6.9-5H5.1Zm13.9 10V9.4l-7 5.1-7-5.1V17h14Z"/></svg>
-        </a>
-        <a class="social-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.9 8.9H3.7V20h3.2V8.9ZM5.3 4a1.9 1.9 0 1 0 0 3.8 1.9 1.9 0 0 0 0-3.8Zm15 9.7c0-3-1.6-5-4.2-5-1.8 0-2.7 1-3.1 1.7V8.9H9.9V20h3.2v-5.8c0-1.6.8-2.6 2.1-2.6 1.2 0 1.9.9 1.9 2.6V20h3.2v-6.3Z"/></svg>
-        </a>
-        <a class="social-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.7 20v-7h2.4l.4-2.8h-2.8V8.4c0-.8.2-1.4 1.4-1.4h1.5V4.5c-.7-.1-1.5-.1-2.2-.1-2.2 0-3.8 1.4-3.8 3.8v2.1H8.2V13h2.4v7h3.1Z"/></svg>
-        </a>
-        <a class="social-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="X">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.3 10.6 21.1 3h-1.9l-5.8 6.5L8.7 3H3.2l7.1 9.9L2.9 21h1.9l6.4-7.1 5.1 7.1h5.5l-7.5-10.4Zm-2.2 2.4-.8-1.1L5.2 4.5h2.7l4.5 6 .8 1.1 6.5 7.9H17l-4.9-6.5Z"/></svg>
-        </a>
-      </span>
-    </div>
-  </footer>
-
+  <footer><div class="footer-links"><span>© 2026 Negasi</span></div></footer>
   <script>
-    (function () {
-      var toggle = document.querySelector(".theme-toggle");
-      if (!toggle) return;
-
-      function syncToggle(theme) {
-        var isDark = theme === "dark";
-        toggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
-        toggle.setAttribute("aria-pressed", String(isDark));
-      }
-
-      var currentTheme = document.documentElement.getAttribute("data-theme") || "light";
-      syncToggle(currentTheme);
-
-      toggle.addEventListener("click", function () {
-        var activeTheme = document.documentElement.getAttribute("data-theme") || "light";
-        var nextTheme = activeTheme === "dark" ? "light" : "dark";
-        document.documentElement.setAttribute("data-theme", nextTheme);
-        localStorage.setItem("theme", nextTheme);
-        syncToggle(nextTheme);
-      });
-    })();
+    (function(){var toggle=document.querySelector(".theme-toggle");if(!toggle)return;function sync(theme){var dark=theme==="dark";toggle.setAttribute("aria-label",dark?"Switch to light mode":"Switch to dark mode");toggle.setAttribute("aria-pressed",String(dark));}var current=document.documentElement.getAttribute("data-theme")||"light";sync(current);toggle.addEventListener("click",function(){var active=document.documentElement.getAttribute("data-theme")||"light";var next=active==="dark"?"light":"dark";document.documentElement.setAttribute("data-theme",next);localStorage.setItem("theme",next);sync(next);});})();
   </script>
 </body>
 </html>
